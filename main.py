@@ -1,6 +1,7 @@
 from discord.ext import commands
 import discord
 import os
+import random
 
 client = commands.Bot(command_prefix="$", intents=discord.Intents.all())
 
@@ -14,7 +15,15 @@ async def on_ready():
 
 @client.command(pass_context=True)
 async def psv(ctx):
-    await ctx.channel.send('Quién para un beso bien sexual?') 
+    posts = os.listdir("posts")
+
+    random_image = random.choice(posts)
+
+    image_path = os.path.join("posts", random_image)
+
+    with open(image_path, "rb") as file:
+        picture = discord.File(file)
+        await ctx.channel.send(file=picture)
 
 
 @client.command(pass_context=True)
@@ -22,12 +31,9 @@ async def help(ctx):
     em = discord.Embed(
         title="Help",
         description=
-        "mm:ss or just type the minutes\n\n***$cd*** starts the countdown\n\n***$stop*** stops the countdown"
+        "***$psv*** envía un post"
     )
     await ctx.send(embed=em)
 
 
-# my_secret = os.environ['bot_token']
-
-# client.run(my_secret)
 client.run(os.environ["TOKEN"])
