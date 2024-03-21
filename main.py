@@ -32,6 +32,10 @@ async def psv(ctx):
         picture = discord.File(file)
         await ctx.channel.send(file=picture)
 
+@client.command(pass_context=True)
+async def pruebita(ctx):
+        await ctx.channel.send('$test')
+
 
 @client.command(pass_context=True)
 async def help(ctx):
