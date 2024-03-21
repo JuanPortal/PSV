@@ -3,9 +3,7 @@ import discord
 import os
 import random
 
-intents = discord.Intents.default()
-intents.guild_messages = True
-client = commands.Bot(command_prefix="$", intents=intents)
+client = commands.Bot(command_prefix="$", intents=discord.Intents.all())
 client.remove_command("help")
 
 
