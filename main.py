@@ -11,6 +11,14 @@ client.remove_command("help")
 async def on_ready():
     print("PSV's ready to go!")
 
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
+
+    if message.content.startswith('$'):
+        await client.process_commands(message)
+
 
 @client.command(pass_context=True)
 async def psv(ctx):
